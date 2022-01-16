@@ -1,0 +1,30 @@
+.pagination {
+    width: 85%;
+    display: flex;
+    justify-content: space-between;
+
+    p {
+        text-decoration: underline;
+        cursor: pointer;
+        transition: color .3s;
+        font-size: 1.5rem;
+
+        &:hover {
+            color: red;
+        }
+    }
+}
+
+.hidden {
+    opacity: 0;
+    cursor: default !important;
+}
+
+@media screen and(max-width:800px) {
+    .pagination {
+
+        p {
+            font-size: 1rem;
+        }
+    }
+}

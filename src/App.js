@@ -53,8 +53,8 @@ function App() {
           let movies = search[1];
           let total = Math.ceil(totalResults[1] / 10);
           setPages(pages => ({
-            ...pages,
-            total
+            total,
+            current: 1,
           }))
           setMatchedMovies(movies);
         }

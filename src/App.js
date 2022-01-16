@@ -108,8 +108,8 @@ function App() {
           <div className={styles.formWrapper}>
             <form onSubmit={onSearchHandler} className={styles.form}>
               <div className={styles.radio}>
-                <label>All <input onChange={radioChangeHandler} type='radio' name='search' checked={criteria === 's' ? true : false} value='s'></input></label>
-                <label>Only one <input onChange={radioChangeHandler} type='radio' name='search' checked={criteria === 't' ? true : false} value='t'></input></label>
+                <label>Search All <input onChange={radioChangeHandler} type='radio' name='search' checked={criteria === 's' ? true : false} value='s'></input></label>
+                <label>Search by title <input onChange={radioChangeHandler} type='radio' name='search' checked={criteria === 't' ? true : false} value='t'></input></label>
               </div>
               <input onChange={(e) => onChangeHandler(e.target.value)} type='text' value={query} placeholder="Enter movie name ..."></input>
               <button type='submit'>Search <span><FaSearch /></span></button>

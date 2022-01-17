@@ -18,10 +18,7 @@ function App() {
   const [error, setError] = useState('');
   const [criteria, setCriteria] = useState('s');
   const [modal, setModal] = useState(false);
-  const [modalMovie, setModalMovie] = useState({
-    movie:[],
-    loading: false,
-  });
+  const [modalMovie, setModalMovie] = useState([]);
   const [pages, setPages] = useState({
     current: 1,
     total: 0

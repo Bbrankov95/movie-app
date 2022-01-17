@@ -129,6 +129,7 @@
   padding: 1rem;
   width: 90%;
   gap: 1rem;
+  min-height: 61vh;
   max-height: 65%;
   overflow-y: auto;
   overflow-x: hidden;

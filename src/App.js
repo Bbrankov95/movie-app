@@ -5,16 +5,23 @@ import { FaSearch } from 'react-icons/fa';
 import Movies from './components/Movies/Movies';
 import Modal from './components/Modal/Modal';
 import Pagination from './components/Pagination/Pagination';
+import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner';
 
 const API_KEY = 52837047;
 
 function App() {
   const [query, setQuery] = useState('');
-  const [matchedMovies, setMatchedMovies] = useState([]);
+  const [matchedMovies, setMatchedMovies] = useState({
+    movies: [],
+    loading: false,
+  });
   const [error, setError] = useState('');
   const [criteria, setCriteria] = useState('s');
   const [modal, setModal] = useState(false);
-  const [modalMovie, setModalMovie] = useState([]);
+  const [modalMovie, setModalMovie] = useState({
+    movie:[],
+    loading: false,
+  });
   const [pages, setPages] = useState({
     current: 1,
     total: 0
@@ -24,9 +31,12 @@ function App() {
 
   useEffect(async () => {
     const response = await (await fetch(MOVIE_URL)).json();
-    const [search, ...rest] = [...Object.entries(response)]
+    const [search, ...rest] = [...Object.entries(response)];
     if (query) {
-      setMatchedMovies(search[1])
+      setMatchedMovies(matchedMovies => ({
+        ...matchedMovies,
+        movies: search[1]
+      }))
     }
   }, [pages.current])
 
@@ -37,17 +47,26 @@ function App() {
       if (query.trim() === '') {
         throw new Error('Movie name is required');
       }
+      setMatchedMovies(matchedMovies => ({
+        ...matchedMovies,
+        loading: true,
+      }))
       const response = await fetch(MOVIE_URL);
       const data = await response.json();
 
       if (data.hasOwnProperty('Error')) {
-        console.log(data.Error)
         setError(data.Error);
-        setMatchedMovies([]);
+        setMatchedMovies(matchedMovies => ({
+          loading: false,
+          movies: [],
+        }));
       } else {
         setError('');
         if (criteria === 't') {
-          setMatchedMovies([data]);
+          setMatchedMovies(matchedMovies => ({
+            loading: false,
+            movies: [data]
+          }));
         } else {
           let [search, totalResults, ...rest] = [...Object.entries(data)];
           let movies = search[1];
@@ -56,12 +75,18 @@ function App() {
             total,
             current: 1,
           }))
-          setMatchedMovies(movies);
+          setMatchedMovies({
+            loading: false,
+            movies
+          })
         }
       }
 
     } catch (err) {
-      setMatchedMovies([]);
+      setMatchedMovies(matchedMovies => ({
+        ...matchedMovies,
+        movies: []
+      }));
       setError(err.message);
     }
   }
@@ -71,7 +96,10 @@ function App() {
 
   const radioChangeHandler = (e) => {
     setCriteria(e.target.value);
-    setMatchedMovies([]);
+    setMatchedMovies(matchedMovies => ({
+      ...matchedMovies,
+      movies: []
+    }));
     setQuery('');
   }
 
@@ -115,17 +143,17 @@ function App() {
               <button type='submit'>Search <span><FaSearch /></span></button>
             </form>
           </div>
-          <div className={styles.wrapperResult}>
-            {criteria === 's' && matchedMovies.length > 0 ? <Pagination onClick={onTestHandler} current={pages.current} total={pages.total} /> : ''}
+          {matchedMovies.loading === false ? <div className={styles.wrapperResult}>
+            {criteria === 's' && matchedMovies.movies.length > 0 ? <Pagination onClick={onTestHandler} current={pages.current} total={pages.total} /> : ''}
             {error ? <div className={styles.error}>{error}</div> : ''}
-            {matchedMovies.length > 0 ?
+            {matchedMovies.movies.length > 0 ?
               <div className={criteria === 't' ?
                 styles.results : styles.resultsAll}>
-                {matchedMovies && criteria === 't'
-                  ? matchedMovies.map(m => MovieCard(m)) :
-                  matchedMovies.map(m => Movies(m, previewHandler))}
+                {matchedMovies.movies && criteria === 't'
+                  ? matchedMovies.movies.map(m => MovieCard(m)) :
+                  matchedMovies.movies.map(m => Movies(m, previewHandler))}
               </div> : ''}
-          </div>
+          </div> : <LoadingSpinner />}
         </div>
       </main>
       {modal ? Modal(modalMovie, () => setModal(!modal)) : ''}

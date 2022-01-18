@@ -35,7 +35,7 @@ function App() {
         movies: search[1]
       }))
     }
-  }, [pages.current])
+  }, [pages])
 
   const onSearchHandler = async (e) => {
     e.preventDefault();
@@ -48,7 +48,8 @@ function App() {
         ...matchedMovies,
         loading: true,
       }))
-      const response = await fetch(MOVIE_URL);
+      
+      const response = await fetch(pages.current !== 1 ? `http://www.omdbapi.com/?${criteria}=${query}&page=1&apikey=${API_KEY}`: MOVIE_URL);
       const data = await response.json();
 
       if (data.hasOwnProperty('Error')) {

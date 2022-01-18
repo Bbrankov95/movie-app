@@ -1,4 +1,3 @@
-import { FaSpinner } from 'react-icons/fa';
 import styles from './LoadingSpinner.module.scss';
 
 const LoadingSpinner = () => {

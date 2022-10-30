@@ -38,9 +38,9 @@ const MovieInfoRow = ({
           customDataClass,
         ].join(" ")}
       >
-        {data}
         {isImdbRating ? <FaStar /> : null}
         {isImdbVotes ? <FaUsers /> : null}
+        {data}
       </p>
     </div>
   );

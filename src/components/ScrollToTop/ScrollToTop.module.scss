@@ -1,0 +1,50 @@
+.Wrapper {
+  position: fixed;
+  background-color: red;
+  bottom: 0;
+  right: 2vw;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s;
+
+  &:hover {
+    width: 150px;
+    border-radius: 9999px;
+  }
+
+  .Hidden {
+    opacity: 0;
+    display: none;
+    font-weight: 900;
+    text-transform: capitalize;
+    margin-right: 5px;
+    color: white;
+  }
+
+  &:hover .Hidden {
+    display: inline;
+    animation: fadeInText linear 0.5s forwards;
+    animation-delay: 0.15s;
+  }
+}
+
+.Faded {
+  opacity: 0;
+  cursor: initial;
+}
+
+.FadedIn {
+  opacity: 1;
+}
+
+@keyframes fadeInText {
+  to {
+    opacity: 1;
+  }
+}

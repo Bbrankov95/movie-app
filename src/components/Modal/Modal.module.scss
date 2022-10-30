@@ -1,39 +1,25 @@
-.wrapper {
-    position: absolute;
-    inset: 0;
-    background-color: rgba(0,0,0,0.7);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    transition: animation .3s;
-    animation: test 1s forwards;
+.Wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  opacity: 0;
+  transition: animation 0.3s;
+  animation: fadeIn 0.7s forwards;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
-.btn {
-    background: red;
-    position: absolute;
-    top: 2%;
-    right: 2%;
-    padding: 1rem;
-    border: none;
-    transition: color .3s;
-
-    &:hover {
-        color: white;
-    }
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
 }
 
-@media screen and (max-width:800px) {
-    .btn {
-        top: 1%;
-        padding: 0.5rem;
-    }
-}
-
-
-@keyframes test {
-    to {
-        opacity: 1;
-    }
+@media screen and (max-width: 1200px) {
+  .Wrapper {
+    height: auto;
+    max-height: none;
+    overflow-y: scroll;
+  }
 }

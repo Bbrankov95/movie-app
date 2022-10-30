@@ -1,183 +1,45 @@
-@import url('https://fonts.googleapis.com/css2?family=Orbitron&display=swap');
-
-.App {
-  max-width: 100vw;
-  height: 100vh;
-  background-color: black;
-  color: white;
-  background: url('https://images.squarespace-cdn.com/content/v1/505bf086c4aadc232f2c8e6f/1357880711408-BPLTKXE3UXDQODQ7IS80/Hoyts-a0106.jpg');
-  background-position: center;
-  overflow: hidden;
-}
+@import url("https://fonts.googleapis.com/css2?family=Orbitron&display=swap");
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Orbitron', sans-serif;
+  font-family: "Orbitron", sans-serif;
 }
 
-.main {
-  width: 100%;
-  height: 100%;
+.App {
+  max-width: 100vw;
+  min-height: 100vh;
   display: flex;
-  justify-content: center;
-}
-
-.wrapper {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.formWrapper {
-  width: 100%;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-
-  input {
-      padding: 1rem;
-      font-size: 1.3rem;
-      width: 50%;
-      margin: auto;
-      font-family: 'Orbitron', 'sans-serif';
-  }
-
-  button {
-      width: fit-content;
-      padding: .5rem 3rem;
-      margin: 1rem auto;
-      background: transparent;
-      color: white;
-      border: 2px solid white;
-      cursor: pointer;
-      transition: background-color .3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      line-height: 1.5rem;
-
-      span {
-        margin-left: .3rem;
-      }
-
-      &:hover {
-        background-color: red;
-        border: 2px solid red;
-      }
-  }
-}
-
-.wrapperResult {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.results {
-  width: 90%;
-  background: rgba(0,0,0,0.7);
-  overflow-y: auto;
-  overflow-x: hidden;
-  scrollbar-color: red black;
-  scrollbar-width: thin;
-}
-
-.resultsAll {
-  display: grid;
-  grid-template-columns: repeat(5,1fr);
-  padding: 1rem;
-  width: 90%;
-  gap: 1rem;
-  min-height: 61vh;
-  max-height: 65%;
-  overflow-y: auto;
-  overflow-x: hidden;
-  background: rgba(0,0,0,0.7);
-  scrollbar-color: red black;
-  scrollbar-width: thin;
-}
-
-.error {
-  color: red;
-  width: 90vw;
-  margin: 0 auto;
-  text-align: center;
-  font-size: 3rem;
-  transition: animation .3s;
-  animation: shake 1s;
-  overflow: hidden !important;
-}
-
-.radio {
-  display: flex;
-  margin: 1rem auto;
-
-  label {
-    text-align: center;
-  }
-
-}
-
-@media screen and (max-width:800px) {
-    .App {
-      height: auto;
-    }
-
-    .wrapper {
-      h1 {
-        font-size: 1.5rem;
-        text-align: center;
-      }
-    }
-
-    .form {
-
-      input {
-        width: clamp(200px,80%,400px);
-      }
-    }
-
-    .radio {
-      
-      input {
-        width: 50% !important;
-      }
-    }
-
-    .App {
-      min-height: 100vh;
-    }
-
-    .resultsAll {
-      max-height: 63%;
-      grid-template-columns: 1fr 1fr;
-    }
-
-    
+  overflow: hidden;
+  background: url("https://images.squarespace-cdn.com/content/v1/505bf086c4aadc232f2c8e6f/1357880711408-BPLTKXE3UXDQODQ7IS80/Hoyts-a0106.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  scroll-behavior: smooth;
+  position: relative;
 }
 
 @keyframes shake {
-  10%, 90% {
+  10%,
+  90% {
     transform: translate3d(-1px, 0, 0);
   }
-  
-  20%, 80% {
+
+  20%,
+  80% {
     transform: translate3d(2px, 0, 0);
   }
 
-  30%, 50%, 70% {
+  30%,
+  50%,
+  70% {
     transform: translate3d(-4px, 0, 0);
   }
 
-  40%, 60% {
+  40%,
+  60% {
     transform: translate3d(4px, 0, 0);
   }
 }
-

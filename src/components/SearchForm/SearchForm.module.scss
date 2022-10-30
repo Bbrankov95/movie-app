@@ -1,0 +1,58 @@
+.Form {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  min-height: 200px;
+
+  .SearchWrapper {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+
+    .SearchInput {
+      font-size: 1.3rem;
+      padding: 10px;
+      width: 50%;
+      font-family: "Orbitron", "sans-serif";
+      border-radius: 10px;
+      outline: none;
+    }
+  }
+
+  button {
+    width: fit-content;
+    padding: 15px 30px;
+    background: black;
+    color: white;
+    border: 1px solid white;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.5rem;
+    border-radius: 10px;
+
+    span {
+      margin-left: 0.3rem;
+    }
+
+    &:hover {
+      background-color: red;
+      border: 1px solid red;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .Form {
+    .SearchWrapper {
+      .SearchInput {
+        width: 70%;
+        font-size: 1rem;
+      }
+    }
+  }
+}

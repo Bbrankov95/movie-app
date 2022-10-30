@@ -1,18 +1,38 @@
-import styles from './Movies.module.scss';
+import MovieInfoRow from "../MovieCard/MovieInfoRow/MovieInfoRow";
+import classes from "./Movies.module.scss";
 
+const Movies = ({ movie = {}, onClick }) => {
+  const rows = Object.entries(movie);
+  const { imdbID, Poster } = movie;
 
-const Movies = ({
-    Title, Year, Type, Poster, imdbID
-}, handler) => {
-
-    return (
-        <div onClick={handler} key={imdbID} id={imdbID} className={styles.movie}>
-            <img src={Poster}></img>
-            <h3><label htmlFor='title'></label>{Title}</h3>
-            <p><label htmlFor='year'>Year: </label>{Year}</p>
-            <p><label htmlFor='type'>Type: </label>{Type}</p>
-        </div>
-    );
-}
+  const posterIsMissing = Poster === "N/A";
+  return (
+    <div
+      onClick={() => onClick(imdbID)}
+      id={movie?.imdbID}
+      className={classes.Movie}
+    >
+      <div
+        className={[
+          classes.ImgWrapper,
+          posterIsMissing ? classes.NoImage : "",
+        ].join(" ")}
+      >
+        <img src={movie?.Poster} alt="movie poster is missing"></img>
+        <p className={classes.HiddenText}>Click To Enter Preview Mode</p>
+      </div>
+      <div className={classes.MovieDetails}>
+        {rows?.map(([label, data], i) => (
+          <MovieInfoRow
+            key={`${data}-${i}`}
+            label={label}
+            hideLabel={label === "Title"}
+            data={data}
+          />
+        ))}
+      </div>
+    </div>
+  );
+};
 
 export default Movies;

@@ -1,17 +1,41 @@
-import styles from './Pagination.module.scss';
+import { memo } from "react";
+import classes from "./Pagination.module.scss";
 
-const Pagination = ({
-    onClick,
-    current,
-    total
-}) => {
-    return(
-        <div onClick={onClick} className={styles.pagination}>
-            <p className={current === 1 ? styles.hidden : ''}>Prev</p>
-            <p>Page: {current} / {total}</p>
-            <p className={current === total ? styles.hidden : ''}>Next</p>
-        </div>
-    );
-}
+const NEXT_PAGE = "NEXT";
+const PREV_PAGE = "PREV";
 
-export default Pagination;
+const Pagination = ({ currentPage, total, setCurrentPage }) => {
+  const isFirstPage = currentPage === 1;
+  const isLastPage = currentPage === total;
+
+  const paginationHandler = (action) => {
+    if (action === NEXT_PAGE && currentPage < total) {
+      setCurrentPage((prevState) => prevState + 1);
+    }
+    if (action === PREV_PAGE && currentPage > 1) {
+      setCurrentPage((prevState) => prevState - 1);
+    }
+  };
+
+  return (
+    <div className={classes.Wrapper}>
+      <button
+        onClick={() => paginationHandler(PREV_PAGE)}
+        className={isFirstPage ? classes.Hidden : null}
+      >
+        Prev
+      </button>
+      <p className={classes.Pagination}>
+        Page: {currentPage} / {total > 0 ? total : 1}
+      </p>
+      <button
+        onClick={() => paginationHandler(NEXT_PAGE)}
+        className={isLastPage ? classes.Hidden : null}
+      >
+        Next
+      </button>
+    </div>
+  );
+};
+
+export default memo(Pagination);

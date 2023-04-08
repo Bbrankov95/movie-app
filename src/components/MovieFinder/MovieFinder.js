@@ -62,7 +62,7 @@ const MovieFinder = () => {
     }
   };
 
-  const newSearch = currentPage === 1;
+  const newSearch = currentPage === 1 && !matchedMovies.length;
 
   useEffect(() => {
     !newSearch &&
